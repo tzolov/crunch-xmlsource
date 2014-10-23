@@ -11,12 +11,37 @@ Apache Crunch XML Source
 
 Add the tzolov GitHub maven repository to the POM file of the project:
 
+```xml
     <repository>
         <id>git-tzolov</id>
         <name>tzolov's Git based repo</name>
         <url>https://github.com/tzolov/maven-repo/raw/master/</url>
     </repository>
+```
+Sample data:
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CATALOG>
+	<PLANT>
+		<COMMON>Bloodroot</COMMON>
+		<BOTANICAL>Sanguinaria canadensis</BOTANICAL>
+		<ZONE>4</ZONE>
+		<LIGHT>Mostly Shady</LIGHT>
+		<PRICE>$2.44</PRICE>
+		<AVAILABILITY>031599</AVAILABILITY>
+	</PLANT>
+	.......
+	<PLANT>
+		<COMMON>Columbine</COMMON>
+		<BOTANICAL>Aquilegia canadensis</BOTANICAL>
+		<ZONE>3</ZONE>
+		<LIGHT>Mostly Shady</LIGHT>
+		<PRICE>$9.37</PRICE>
+		<AVAILABILITY>030699</AVAILABILITY>
+	</PLANT>
+</CATALOG>
+```
 
 Sample code:
 
