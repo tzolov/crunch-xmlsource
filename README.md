@@ -9,38 +9,35 @@ Apache Crunch XML Source
 
 ## Usage
 
+Add the tzolov GitHub maven repository to the POM file of the project:
+
+    <repository>
+        <id>git-tzolov</id>
+        <name>tzolov's Git based repo</name>
+        <url>https://github.com/tzolov/maven-repo/raw/master/</url>
+    </repository>
 
 
 Sample code:
 
-		PType<String> ptype = Writables.strings();
-		
-		
-		String xmlInFile = tmpDir.copyResourceFileName("sample1.xml");
-		String outFile = tmpDir.getFileName("out");
+```java
+	XmlSource xmlSource = new XmlSource(xmlInFile, "<PLANT", "</PLANT>");
 
-		xmlElementCount = 0;
+	MRPipeline p = new MRPipeline(XmlSourceIT.class, tmpDir.getDefaultConfiguration());
 
-		XmlSource xmlSource = new XmlSource(xmlInFile, "<PLANT", "</PLANT>");
+	PCollection<String> in = p.read(xmlSource);
 
-		MRPipeline p = new MRPipeline(XmlSourceIT.class,
-				tmpDir.getDefaultConfiguration());
+	PTable<String, String> out = in.by(new MapFn<String, String>() {
 
-		p.enableDebug();
-		
-		PCollection<String> in = p.read(xmlSource);
+		@Override
+		public String map(String input) {
+			xmlElementCount++;
+			return input;
+		}
+	}, Writables.strings());
 
-		PTable<String, String> out = in.by(new MapFn<String, String>() {
+	out.write(To.textFile(outFile));
 
-			@Override
-			public String map(String input) {
-				xmlElementCount++;
-				return input;
-			}
-		}, ptype);
-
-		out.write(To.textFile(outFile));
-
-		p.done();
-
+	p.done();
+```
   
