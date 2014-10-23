@@ -18,6 +18,16 @@ Add the tzolov GitHub maven repository to the POM file of the project:
         <url>https://github.com/tzolov/maven-repo/raw/master/</url>
     </repository>
 ```
+
+Add the crunch XML source dependecy:
+```xml
+	<dependency>
+		<groupId>org.apache.crunch.io.xml</groupId>
+		<artifactId>crunch-xmlsource</artifactId>
+		<version>0.0.1</version>	
+	</dependency>
+```
+
 Sample data:
 
 ```xml
