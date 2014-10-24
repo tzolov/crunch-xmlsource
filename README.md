@@ -58,21 +58,19 @@ Sample code:
 ```java
 	XmlSource xmlSource = new XmlSource(xmlInFile, "<PLANT", "</PLANT>");
 
-	MRPipeline p = new MRPipeline(XmlSourceIT.class, tmpDir.getDefaultConfiguration());
+	MRPipeline pipeline = new MRPipeline(XmlSourceIT.class);
 
-	PCollection<String> in = p.read(xmlSource);
+	PCollection<String> in = pipeline.read(xmlSource);
 
 	PTable<String, String> out = in.by(new MapFn<String, String>() {
-
 		@Override
 		public String map(String input) {
-			xmlElementCount++;
 			return input;
 		}
 	}, Writables.strings());
 
 	out.write(To.textFile(outFile));
 
-	p.done();
+	pipeline.done();
 ```
   
